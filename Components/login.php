@@ -1,11 +1,9 @@
 <?php
 
-    $page = $_SESSION['page'];
-
     $login = ''.
     '<div class ="login-page container" >'.
         '<h1>Please login.</h1>'.
-        '<form method="GET" action="./Pages/login-page.php">'.
+        '<form method="POST" action="./Pages/login-page.php">'.
             '<!-- Username -->'.
             'Username'.
             '<span id="login-username">'.

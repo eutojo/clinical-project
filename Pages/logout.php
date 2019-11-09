@@ -1,3 +1,8 @@
+<?php
+    session_start(); 
+?>
+
+
 <head>
     <!-- Link to stylesheet -->
     <link rel="stylesheet" href="../CSS/styles.css">
@@ -9,11 +14,14 @@
 </head>
 <body>
     <?php
-    echo $_SESSION['logged_in'];
-    //unset($_SESSION['logged_in']);
-    $_SESSION['page'] = 'logout';
-    require_once('../Components/menu-bar.php');
+
+    if(isset($_SESSION['loggedin']) && $_SESSION['loggedin'] === true){
+        session_unset(); 
+        
+    } 
+
+    header('Location: ../index.php');
+    
     ?>
 
-    Logout
 </body>

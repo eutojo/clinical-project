@@ -1,3 +1,6 @@
+<?php
+    session_start(); 
+?>
 <head>
     <!-- Link to stylesheet -->
     <link rel="stylesheet" href="../CSS/styles.css">
@@ -9,12 +12,12 @@
 </head>
 <body>
     <?php
-    $_SESSION['logged_in'] = 'true';
+    $_SESSION['loggedin'] = true;
     $_SESSION['page'] = 'login';
     require_once('../Components/menu-bar.php');
 
-    if(isset($_SESSION['logged_in'])){
-        echo $_SESSION['logged_in'];
+    if(isset($_SESSION['loggedin'])){
+        echo $_SESSION['loggedin'];
 
     }
     ?>

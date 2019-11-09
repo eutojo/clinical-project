@@ -1,3 +1,7 @@
+<?php
+    session_start(); 
+?>
+
 <head>
     <!-- Link to stylesheet -->
     <link rel="stylesheet" href="./CSS/styles.css">
@@ -9,24 +13,17 @@
 </head>
 <body>
     <?php
-    if (session_id() === "") { 
-        session_start(); 
-        echo "New session";
-    } else {
-        echo "resume sesion";
-    }
-
-    echo session_id();
-
-    $_SESSION['page'] = 'index';
+   
     require_once('./Components/menu-bar.php');
 
-    if(isset($_SESSION['logged_in'])){
-        echo $_SESSION['logged_in'];
-
+    if(isset($_SESSION['loggedin']) && $_SESSION['loggedin'] === true){
+        echo $_SESSION['loggedin'];
     } else {
+        
         require_once('./Components/login.php');
     }
+
+    $_SESSION['page'] = 'index';
     
     ?>
 </body>
