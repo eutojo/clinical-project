@@ -20,7 +20,7 @@
         echo $_SESSION['loggedin'];
     } else {
         
-        require_once('./Components/login.php');
+        require_once('./Components/login-component.php');
     }
 
     $_SESSION['page'] = 'index';

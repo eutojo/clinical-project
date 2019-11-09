@@ -1,9 +1,9 @@
 <?php
 
-    $login = ''.
+    $login_component = ''.
     '<div class ="login-page container" >'.
         '<h1>Please login.</h1>'.
-        '<form method="POST" action="./Pages/login-page.php">'.
+        '<form method="POST" action="./PHP/login-logic.php">'.
             '<!-- Username -->'.
             'Username'.
             '<span id="login-username">'.
@@ -20,5 +20,5 @@
         '</form>'.
     '</div>';
 
-    echo $login;
+    echo $login_component;
 ?>
