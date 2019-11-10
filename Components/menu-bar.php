@@ -3,28 +3,37 @@
 $menu_bar = "".
 
 '<div class="menu-bar container">'.
-    '<div class="menu-bar item">';
+    // Home button
+    '<div class="menu-bar item">'.
+        '<a href="./home.php"> Home </a>'.
+    '</div>';
+    
+    // User is logged in
+    if(isset($_SESSION['loggedin']) && $_SESSION['loggedin'] === true) {
 
-        if($_SESSION['page'] == "index") {
-            $menu_bar .= '<a href="./index.php"> Home </a>';
-        } else {
-            $menu_bar .= '<a href="../index.php"> Home </a>';
+        // If user is admin, show the assignments
+        if(isset($_SESSION['admin']) && $_SESSION['admin'] == 1) {
+            $menu_bar .=
+                // Access to reserachers
+                '<div class="menu-bar item">'. 
+                '<a href="./researchers.php"> Researchers </a>'.
+                '</div>'.
+
+                // Access to asssignments
+                '<div class="menu-bar item">'. 
+                '<a href="./assignments.php"> Assignments </a>'.
+                '</div>'; 
         }
 
-    $menu_bar .=
-    '</div>';
-    if(isset($_SESSION['loggedin']) && $_SESSION['loggedin'] === true) {
-        if($_SESSION['page'] == "index") {
-            $menu_bar .=
-                '<div class="menu-bar item">'. 
-                '<a href="./Pages/logout.php"> Logout </a>'.
-                '</div>';  
-        } else {
-            $menu_bar .=
-                '<div class="menu-bar item">'. 
-                '<a href="./logout.php"> Logout </a>'.
-                '</div>';  
-        }    
+        $menu_bar .=
+            // Subjects
+            '<div class="menu-bar item">'. 
+            '<a href="./subjects.php"> Subjects </a>'.
+            '</div>'.
+            // Logout button
+            '<div class="menu-bar item">'. 
+            '<a href="../PHP/logout-logic.php">Logout </a>'.
+            '</div>';    
     }
         
     

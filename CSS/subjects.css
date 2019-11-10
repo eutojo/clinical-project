@@ -1,0 +1,17 @@
+.subject-row{
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    justify-content: space-around;
+}
+
+.title-row{
+    display: flex;
+    flex-direction: row;
+    width: 100vw;
+    justify-content: space-around;
+}
+
+.hide {
+    display:none !important;
+}

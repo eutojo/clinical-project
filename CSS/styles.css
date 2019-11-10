@@ -6,3 +6,7 @@ a {
     color: inherit;
     text-decoration: inherit;
 }
+
+.hide {
+    display:none !important;
+}
