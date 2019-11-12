@@ -8,6 +8,7 @@
     <link rel="stylesheet" href="../CSS/styles.css">
     <link rel="stylesheet" href="../CSS/menu-bar.css">
     <link rel="stylesheet" href="../CSS/login.css">
+    <link rel="stylesheet" href="../CSS/researcher.css">
 
     <script src="../JS/functions.js">
     </script>
@@ -24,7 +25,7 @@
     if(isset($_SESSION['loggedin']) && $_SESSION['loggedin'] === true){
         // Check if also admin
         if(isset($_SESSION['admin']) && $_SESSION['admin'] == 1){
-            echo 'Hello admin';
+            require_once('../Components/researcher-component.php');
         } else {
             echo '<script type="text/javascript">'.
                 'adminPrompt();'.

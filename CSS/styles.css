@@ -7,6 +7,25 @@ a {
     text-decoration: inherit;
 }
 
+.table-row {
+    display: flex;
+    flex-direction: row;
+    width: 100vw;
+    justify-content: space-around;
+}
+
+.table-col {
+    display: flex;
+    flex-direction: column;
+    width: 100vw;
+    justify-content: space-around;
+}
+
 .hide {
     display:none !important;
+}
+
+form.assignments{
+    display: flex;
+    flex-direction: row;
 }

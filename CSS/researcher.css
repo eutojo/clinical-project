@@ -1,0 +1,8 @@
+input.researcher {
+    /* //width: 20%; */
+}
+
+form.researcher {
+    display: flex;
+    flex-direction: row;
+}

@@ -10,6 +10,9 @@
 
     if($_SESSION['debug'] === true){
         $_SESSION['loggedin'] = true;
+        $_SESSION['researcher_ID'] = 'admin';
+        $_SESSION['name'] = 'Debug Admin';
+        $_SESSION['admin'] = 1;
     } else {
         $conn = odbc_connect('z5116858', '', '',SQL_CUR_USE_ODBC);
         $query = "SELECT count(*) FROM Researcher WHERE Researcher_ID = '". $username ."' AND Password = '". $password ."'";

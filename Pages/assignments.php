@@ -24,7 +24,7 @@
     if(isset($_SESSION['loggedin']) && $_SESSION['loggedin'] === true){
         // Check if also admin
         if(isset($_SESSION['admin']) && $_SESSION['admin'] == 1){
-            echo 'Hello admin';
+            require_once('../Components/assignments-component.php');
         } else {
             echo '<script type="text/javascript">'.
                 'adminPrompt();'.
