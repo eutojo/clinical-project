@@ -25,7 +25,12 @@
 
     // User has logged in
     if(isset($_SESSION['loggedin']) && $_SESSION['loggedin'] === true){
-       require_once('../Components/home-component.php');
+        $homepage_component = ''. 
+        '<div class ="login-page container" >'.
+        '<h1>Welcome '. $_SESSION['name']. '</h1>'.
+        '</div>';
+    
+        echo $homepage_component;
     } else {
         if(isset($_SESSION['user']) && $_SESSION['user']=='INVALID' ){
             unset($_SESSION['user']);
@@ -33,7 +38,27 @@
                 'invalidLogin();'.
                 '</script>';
         }
-        require_once('../Components/login-component.php');
+        $login_component = ''.
+        '<div class ="login-page container" >'.
+        '<h1>Please login.</h1>'.
+            '<form class="login" method="POST" action="../PHP/login-logic.php">'.
+                '<!-- Username -->'.
+                'Username'.
+                '<span>'.
+                    '<!-- For error handling -->'.
+                '</span>'.
+                '<input type="text" id="login-username" name="login-username">'.
+                '<!-- Password -->'.
+                'Password'.
+                '<span>'.
+                    '<!-- For error handling -->'.
+                '</span>'.
+                '<input type="password" id="login-password" name="login-password">'.
+                '<input type="submit" value="Login">'.
+            '</form>'.
+        '</div>';
+
+        echo $login_component;
     }
 
     

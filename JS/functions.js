@@ -13,6 +13,22 @@ function adminPrompt(){
     window.location = './home.php';
 }
 
+function subjectPromt(){
+    alert('Subject does\'t exist or you do not have permission to view their details.');
+    window.location = './subjects.php';
+}
+
+function researcherPrompt(admin){
+    alert('Subject does\'t exist or you do not have permission to view their details.');
+
+    if(admin == 1){
+        window.location = './researchers.php';
+    } else {
+        window.location = './home.php';
+    }
+}
+
+
 // Filtering
 
 function subjectsFilter(){
@@ -159,12 +175,10 @@ function validateName(type){
 function removeSubject(researcher_id, subject_id){
     if(subject_id == "NULL"){
         subject_id = null;
-        console.log('subject null');
     }
 
     if(researcher_id == "NULL"){
         researcher_id = null;
-        console.log('researcher null');
     }
 
     $.ajax({
@@ -176,4 +190,30 @@ function removeSubject(researcher_id, subject_id){
         }
 
    });
+}
+
+// Changing details
+function updateSubject(){
+    var subject_name = document.getElementById('subject_name');
+    var subject_surname = document.getElementById('subject_surname');
+    var subject_dob = document.getElementById('subject_dob');
+    var subject_gender = document.getElementById('subject_gender');
+    var subject_contact = document.getElementById('subject_contact');
+    if(subject_name.readOnly){
+        subject_name.readOnly = false;
+        subject_surname.readOnly = false;
+        subject_dob.readOnly = false;
+        subject_gender.disabled = false;
+        subject_contact.readOnly = false;
+        document.form__change_subject.submit_button.value = "Submit";
+        return false;
+    } else {
+        subject_name.readOnly = true;
+        subject_surname.readOnly = true;
+        subject_dob.readOnly = true;
+        subject_gender.disabled = true;
+        subject_contact.readOnly = true;
+        document.form__change_subject.submit_button.value = "Edit details";
+        return true;
+    }
 }

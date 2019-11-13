@@ -31,7 +31,15 @@ $menu_bar = "".
             // Subjects
             '<div class="menu-bar item">'. 
             '<a href="./subjects.php"> Subjects </a>'.
-            '</div>'.
+            '</div>';
+
+            if(isset($_SESSION['admin']) && $_SESSION['admin'] == 1) {
+                $menu_bar .=
+                '<div class="menu-bar item">'. 
+                '<a href="./subjects.php"> Data Summary </a>'.
+                '</div>';
+            }
+            $menu_bar .=
             // Logout button
             '<div class="menu-bar item">'. 
             '<a href="../PHP/logout-logic.php">Logout </a>'.
