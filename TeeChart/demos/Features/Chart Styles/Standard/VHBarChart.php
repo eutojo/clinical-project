@@ -3,8 +3,8 @@
         //Includes
         include "../../../../sources/TChart.php";            
 
-        if(isset($_POST["barStyle"]))
-          $barStyle = $_POST["barStyle"];
+        if(isset($_REQUEST["barStyle"]))
+          $barStyle = $_REQUEST["barStyle"];
           
         $chart1 = new TChart(700,450);
 
@@ -16,7 +16,7 @@
         $chart1->getChart()->getSeries(0)->fillSampleValues(10);
         $chart1->getPanel()->setColor(Color::getWHITE());
 
-        if(isset($_POST["barStyle"])) {
+        if(isset($_REQUEST["barStyle"])) {
           switch ($barStyle) {
           case 0:
             $bar->setBarStyle(BarStyle::$RECTANGLE);

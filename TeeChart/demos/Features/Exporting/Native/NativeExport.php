@@ -3,10 +3,10 @@
       include "../../../../sources/TChart.php";
 
       // Get Values from form
-      if(isset($_POST["path"]))
-        $path = $_POST['path'];
-//      if(isset($_POST["includeindex"]))
-//        $includeindex = $_POST["includeindex"];
+      if(isset($_REQUEST["path"]))
+        $path = $_REQUEST['path'];
+//      if(isset($_REQUEST["includeindex"]))
+//        $includeindex = $_REQUEST["includeindex"];
 
       // Assign Header text
       $chart1 = new TChart(600,450);
@@ -22,7 +22,7 @@
       print '<img src="chart1.png?rand='.$rand.'"><p>';         
 
       // Save Chart to text
-      if(isset($_POST['submit'])) {
+      if(isset($_REQUEST['submit'])) {
           if ($path!="") {
   //          if (realpath($path)) {
               $chart1->getExport()->getTemplate()->toFile($path);

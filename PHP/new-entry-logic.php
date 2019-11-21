@@ -2,12 +2,12 @@
 
     $conn = odbc_connect('z5116858', '', '',SQL_CUR_USE_ODBC);
     // Adding new researcher
-    if(isset($_POST['new__researcher_name'])){
-        $name = str_replace("'", "''", $_POST['new__researcher_name']);
-        $surname = str_replace("'", "''", $_POST['new__researcher_surname']);
-        $id = $_POST['new__researcher_id'];
-        $password = $_POST['new__researcher_password'];
-        if(isset($_POST['new__researcher_admin'])){
+    if(isset($_REQUEST['new__researcher_name'])){
+        $name = str_replace("'", "''", $_REQUEST['new__researcher_name']);
+        $surname = str_replace("'", "''", $_REQUEST['new__researcher_surname']);
+        $id = $_REQUEST['new__researcher_id'];
+        $password = $_REQUEST['new__researcher_password1'];
+        if(isset($_REQUEST['new__researcher_admin'])){
             $admin = 1;
         } else {
             $admin = 0;
@@ -18,9 +18,9 @@
         header('Location:../Pages/researchers.php');
     
     // Adding new assignment
-    } else if(isset($_POST['researcher_id'])){
-        $researcher_id = $_POST['researcher_id'];
-        $subject_id = $_POST['subject_id'];
+    } else if(isset($_REQUEST['researcher_id'])){
+        $researcher_id = $_REQUEST['researcher_id'];
+        $subject_id = $_REQUEST['subject_id'];
         $query = "INSERT INTO Assignments (Researcher_ID, Subject_ID) VALUES ('". $researcher_id ."', '". $subject_id. "')";
         $res = odbc_exec($conn, $query);
 
@@ -36,8 +36,8 @@
     } else {
 
         $id = $_REQUEST['new__subject_id'];
-        $name = str_replace("'", "''", $_POST['new__subject_name']);
-        $surname = str_replace("'", "''", $_POST['new__subject_surname']);
+        $name = str_replace("'", "''", $_REQUEST['new__subject_name']);
+        $surname = str_replace("'", "''", $_REQUEST['new__subject_surname']);
         $dob = $_REQUEST['new__subject_dob'];
         $gender = $_REQUEST['new__subject_gender'];
 

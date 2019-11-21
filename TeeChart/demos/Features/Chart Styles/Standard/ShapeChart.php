@@ -2,10 +2,10 @@
         //Includes
         include "../../../../sources/TChart.php";
 
-        if(isset($_POST["transparent"]))
-          $transparent = $_POST["transparent"];
-        if(isset($_POST["style"]))
-          $style = $_POST["style"];
+        if(isset($_REQUEST["transparent"]))
+          $transparent = $_REQUEST["transparent"];
+        if(isset($_REQUEST["style"]))
+          $style = $_REQUEST["style"];
 
         $chart1 = new TChart(600,450);
         $chart1->getChart()->getHeader()->setText("Shape Style");
@@ -16,7 +16,7 @@
 
         // Changes the Shape style of the Series on Top
 
-        if(isset($_POST["style"]))
+        if(isset($_REQUEST["style"]))
         switch ($style) {
           case 0:
             $shape->setStyle(ShapeStyle::$RECTANGLE);

@@ -35,6 +35,7 @@
             for($i=1;$i<=odbc_num_fields($res);$i++){
                 echo "<div style='width: 33.33%'><h2>" .odbc_field_name($res, $i) ."</h2></div>";
             }
+            echo '<div style="width:85.64px"></div>';
             echo "</div>";
             while(odbc_fetch_row($res)){
                 $admin_id = false;
@@ -53,7 +54,9 @@
                 }
                 for($i=1;$i<=odbc_num_fields($res);$i++){
                     if($i == 4){
-                        echo "<div style='width: 33.33%'>" .substr(odbc_result($res, $i),0,-9 )."</div>";
+                        $date = new DateTime(odbc_result($res, $i));
+                        $dob = str_replace('-','/',$date->format('d-m-Y'));
+                        echo "<div style='width: 33.33%'>" .$dob."</div>";
                     } else {
                         echo "<div style='width: 33.33%'>" .odbc_result($res, $i) ."</div>";
                     }
@@ -71,7 +74,7 @@
             for($i=1;$i<=odbc_num_fields($res);$i++){
                 echo "<div style='width: 33.33%'><h2>" .odbc_field_name($res, $i) ."</h2></div>";
             }
-    
+            echo '<div style="width:85.64px"></div>';
             echo "</div>";
             while(odbc_fetch_row($res)){
                 echo '<a href="./individual-subject.php?id='.odbc_result($res, 1).'" ><div class="table-row">';
@@ -87,22 +90,33 @@
 
         $new_subject_form = ''.
         '<div>'.
-            '<form id="subjects-form" class="table-row" method="POST" action="../PHP/new-entry-logic.php">'.
+            '<div class="table-row" style="margin-left:-0.5em">'. 
+                '<span style="width: 33.33%" id="validation__subject_id"></span>'.
+                '<span style="width: 33.33%" id="validation__subject_name"></span>'.
+                '<span style="width: 33.33%" id="validation__subject_surname"></span>'.
+                '<span style="width: 33.33%" id="validation__subject_dob"></span>'.
+                '<span style="width: 33.33%"></span>'.
+                '<span style="width: 33.33%" id="validation__subject_contact"></span>'.
+                '<span style="width: 50px"></span>'.
+            '</div>'.
+        '</div>'.
+        '<div>'.
+            '<form id="subjects-form" class="table-row" method="POST" action="../PHP/new-entry-logic.php" onSubmit="return validInfo(\'inv_subject\')">'.
                 '<div style="width: 33.33%" >' .
                     // ID
-                    '<input type="text" id="new__subject_id" name="new__subject_id">'.
+                    '<input type="text" id="new__subject_id" name="new__subject_id" maxlength="4" onChange="validateID(\'subject\')">'.
                 '</div>' .
                 '<div style="width: 33.33%" >' .
                     // First Name
-                    '<input type="text" id="new__subject_name" name="new__subject_name">'.
+                    '<input type="text" id="new__subject_name" name="new__subject_name" maxlength="15" onChange="validateName(\'first\',\'subject\')">'.
                 '</div>' .
                 '<div style="width: 33.33%" >' .
                     // Last Name
-                    '<input type="text" id="new__subject_surname" name="new__subject_surname">'.
+                    '<input type="text" id="new__subject_surname" name="new__subject_surname" maxlength="15" onChange="validateName(\'last\',\'subject\')">'.
                 '</div>' .
                 '<div style="width: 33.33%" >' .
                     // DOB
-                    '<input type="text" id="new__subject_dob" name="new__subject_dob">'.
+                    '<input type="text" id="new__subject_dob" name="new__subject_dob" onChange="validateBirthday(\'subject\')">'.
                 '</div>' .
                 '<div style="width: 33.33%" >' .
                     // Gender
@@ -113,7 +127,7 @@
                 '</div>' .
                 '<div style="width: 33.33%" >' .
                     // Contact
-                    '<input type="text" id="new__subject_contact" name="new__subject_contact">'.
+                    '<input type="text" id="new__subject_contact" name="new__subject_contact" maxlength="10" onChange="validateContact(\'subject\')">'.
                 '</div>' .
                 '<div>' .
                     // Submit button

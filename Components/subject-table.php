@@ -17,9 +17,9 @@
             echo "<div class='table-row'>";
             for($i=1;$i<=odbc_num_fields($res);$i++){
                 if($i == 4){
-                    echo "<div style='width: 33.33%'>" .substr(odbc_result($res_subj, $i),0,-9 )."</div>";
+                    echo "<div style='width: 33.33%'>" .substr(odbc_result($res, $i),0,-9 )."</div>";
                 } else {
-                    echo "<div style='width: 33.33%'>" .odbc_result($res_subj, $i) ."</div>";
+                    echo "<div style='width: 33.33%'>" .odbc_result($res, $i) ."</div>";
                 }
             }
             if($_SESSION['page'] == 'individual-researcher'){

@@ -5,8 +5,8 @@
     // Login bypass
     $_SESSION['debug'] = false;
 
-    $username = $_POST["login-username"];
-    $password = $_POST["login-password"];
+    $username = $_REQUEST["login-username"];
+    $password = $_REQUEST["login-password"];
 
     if($_SESSION['debug'] === true){
         $_SESSION['loggedin'] = true;

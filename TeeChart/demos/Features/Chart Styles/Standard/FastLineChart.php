@@ -2,12 +2,12 @@
         //Includes
         include "../../../../sources/TChart.php";
 
-        if(isset($_POST["stairs"]))
-          $stairs = $_POST["stairs"];
-        if(isset($_POST["invstairs"]))
-          $invstairs = $_POST["invstairs"];
-        if(isset($_POST["ignorenulls"]))
-          $ignorenulls = $_POST["ignorenulls"];
+        if(isset($_REQUEST["stairs"]))
+          $stairs = $_REQUEST["stairs"];
+        if(isset($_REQUEST["invstairs"]))
+          $invstairs = $_REQUEST["invstairs"];
+        if(isset($_REQUEST["ignorenulls"]))
+          $ignorenulls = $_REQUEST["ignorenulls"];
 
         $chart1 = new TChart(600,450);
         $chart1->getChart()->getHeader()->setText("FastLine Style");

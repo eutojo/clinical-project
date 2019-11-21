@@ -29,3 +29,7 @@ form.assignments{
     display: flex;
     flex-direction: row;
 }
+
+span {
+    height: 1em;
+}

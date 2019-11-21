@@ -5,7 +5,7 @@
         $chart1 = new TChart(820,420);
         $chart1->getChart()->getHeader()->setText("Arrow Style");
 
-        if(isset($_POST["view3D"]))
+        if(isset($_REQUEST["view3D"]))
           $chart1->getChart()->getAspect()->setView3D(true);
         else
           $chart1->getChart()->getAspect()->setView3D(false);

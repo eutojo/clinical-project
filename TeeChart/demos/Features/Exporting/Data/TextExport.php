@@ -3,16 +3,16 @@
       include "../../../../sources/TChart.php";
 
       // Get Values from form
-      if(isset($_POST["path"]))
-        $path = $_POST['path'];
-      if(isset($_POST["header"]))
-        $header = $_POST["header"];
-      if(isset($_POST["seriestitle"]))
-        $seriestitle = $_POST["seriestitle"];
-      if(isset($_POST["pointindex"]))
-        $pointindex = $_POST["pointindex"];
-      if(isset($_POST["labels"]))
-        $labels = $_POST["labels"];
+      if(isset($_REQUEST["path"]))
+        $path = $_REQUEST['path'];
+      if(isset($_REQUEST["header"]))
+        $header = $_REQUEST["header"];
+      if(isset($_REQUEST["seriestitle"]))
+        $seriestitle = $_REQUEST["seriestitle"];
+      if(isset($_REQUEST["pointindex"]))
+        $pointindex = $_REQUEST["pointindex"];
+      if(isset($_REQUEST["labels"]))
+        $labels = $_REQUEST["labels"];
 
       // Assign Header text
       $chart1 = new TChart(600,450);
@@ -28,7 +28,7 @@
       print '<img src="chart1.png?rand='.$rand.'"><p>';         
 
       // Save Chart to text
-      if(isset($_POST['submit'])) {
+      if(isset($_REQUEST['submit'])) {
           if ($path!="") {
             if (realpath($path)) {
               $chart1->getExport()->getData()->getText()->setIncludeHeader(isset($header));

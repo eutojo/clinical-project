@@ -3,15 +3,15 @@
       include "../../../../sources/TChart.php";
 
       // Get Values from form
-      if(isset($_POST["path"]))
-        $path = $_POST['path'];
+      if(isset($_REQUEST["path"]))
+        $path = $_REQUEST['path'];
 
       // Assign Header text
       $chart1 = new TChart(600,450);
       $chart1->getHeader()->setText("XML Import Demo");
 
       // Save Chart to text
-      if(isset($_POST['submit'])) {
+      if(isset($_REQUEST['submit'])) {
           if ($path!="") {
             if (file_exists($path)) {
               $chart1->getImport()->getXML()->load($path);

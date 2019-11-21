@@ -1,50 +1,47 @@
 <?php
 
-    // $conn = odbc_connect('z5116858', '', '',SQL_CUR_USE_ODBC);
-    // // Adding new researcher
-    // if(isset($_POST['new__researcher_name'])){
-    //     $name = str_replace("'", "''", $_POST['new__researcher_name']);
-    //     $surname = str_replace("'", "''", $_POST['new__researcher_surname']);
-    //     $id = $_POST['new__researcher_id'];
-    //     $password = $_POST['new__researcher_password'];
-    //     if(isset($_POST['new__researcher_admin'])){
-    //         $admin = 1;
-    //     } else {
-    //         $admin = 0;
-    //     }
-    //     $query = "INSERT INTO Researcher (Researcher_ID, Password, FirstName, Surname, Admin) VALUES ". 
-    //     "('". $id ."', '". $password. "',  '". $name."', '" . $surname. "', " . $admin. ")";
-    //     $res = odbc_exec($conn, $query);
-    //     header('Location:../Pages/researchers.php');
-    
-    // // Adding new assignment
-    // } else if(isset($_POST['researcher_id'])){
-    //     $researcher_id = $_POST['researcher_id'];
-    //     $subject_id = $_POST['subject_id'];
-    //     $query = "INSERT INTO Assignments (Researcher_ID, Subject_ID) VALUES ('". $researcher_id ."', '". $subject_id. "')";
-    //     $res = odbc_exec($conn, $query);
-    //     header('Location:../Pages/assignments.php');
+    $conn = odbc_connect('z5116858', '', '',SQL_CUR_USE_ODBC);
 
-    // // Adding new subject
-    // } else {
+    print_r($_REQUEST);
+    if(isset($_REQUEST['researcher_id'])){
+        $id = $_REQUEST['researcher_id'];
+        $name = $_REQUEST['researcher_name'];
+        $surname = $_REQUEST['researcher_surname'];
+        $password = $_REQUEST['researcher_password1'];
 
-    //     $id = $_REQUEST['new__subject_id'];
-    //     $name = str_replace("'", "''", $_POST['new__subject_name']);
-    //     $surname = str_replace("'", "''", $_POST['new__subject_surname']);
-    //     $dob = $_REQUEST['new__subject_dob'];
-    //     $gender = $_REQUEST['new__subject_gender'];
+        if (isset($_REQUEST['researcher_admin'])){
+            $admin = 1;
+        } else {
+            $admin = 0;
+        }
 
-    //     if(isset($_REQUEST['new__subject_contact'])){
-    //         $contact = $_REQUEST['new__subject_contact'];
-    //         $query = "INSERT INTO Subject (Subject_ID, FirstName, LastName, DOB, Gender, Contact) VALUES ".
-    //         " ('". $id ."', '". $name. "', '". $surname. "', '". $dob. "', '". $gender. "', '". $contact. "')";
-    //     } else {
-    //         $query = "INSERT INTO Subject (Subject_ID, FirstName, LastName, DOB, Gender) VALUES ".
-    //         " ('". $id ."', '". $name. "', '". $surname. "', '". $dob. "', '". $gender. "')";
-    //     }
-    //     $res = odbc_exec($conn, $query);
-    //     header('Location:../Pages/subjects.php');
+        $query = 'UPDATE Researcher SET FirstName=\''.$name.'\', Surname=\''.$surname.'\', '. 
+        'Admin ='. $admin;
+        if(strlen($_REQUEST['researcher_password1']) != 0) {
+            $query .= 
+            ', Password=\''.$password.'\'';
+        }
+        $query .= 
+            ' WHERE Researcher_ID=\''.$id.'\'';
+        
+            echo $query;
+        $res = odbc_exec($conn, $query);
 
-    // }
-   
+        $location = 'Location:../Pages/individual-researcher.php?id='.$id;
+        header($location);
+    } else {
+        $id  = $_REQUEST['subject_id'];
+        $name = $_REQUEST['subject_name'];
+        $surname = $_REQUEST['subject_surname'];
+        $dob = $_REQUEST['subject_dob'];
+        // $gender = $_REQUEST['subject_gender'];
+        $contact = $_REQUEST['subject_contact'];
+
+        $query = 'UPDATE Subject SET FirstName=\''.$name.'\', LastName=\''.$surname.'\', DOB=\''.$dob.
+        '\', Contact=\''.$contact.'\' WHERE Subject_ID=\''.$id.'\'';
+        echo $query;
+        $res = odbc_exec($conn, $query);
+        $location = 'Location:../Pages/individual-subject.php?id='.$id;
+        header($location);
+    }
     

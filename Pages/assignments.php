@@ -34,25 +34,28 @@
                 $researcher_id = odbc_result($res, 1);
             
                 // Their subjects
-                $query = "SELECT Subject.[Subject_ID], FirstName, LastName, DOB, Gender, Contact FROM Subject INNER JOIN Assignments ON (Subject.[Subject_ID] = Assignments.[Subject_ID] AND Assignments.[Researcher_ID] ='" . $researcher_id."')";
+                $query = "SELECT Subject.[Subject_ID], FirstName, LastName FROM Subject INNER JOIN Assignments ON (Subject.[Subject_ID] = Assignments.[Subject_ID] AND Assignments.[Researcher_ID] ='" . $researcher_id."')";
                 $res_subj = odbc_exec($conn, $query);
 
                 echo '<div class="table-row">';
                 for($i=1;$i<=odbc_num_fields($res_subj);$i++){
                     echo "<div style='width: 33.33%'><h2>" .odbc_field_name($res_subj, $i) ."</h2></div>";
                 }
+                echo '<div style="width:65.64px"></div>';
                 echo "</div>";
                 while(odbc_fetch_row($res_subj)){
-                    echo "<div class='table-row'>";
+                    echo '<div class=\'table-row\'>';
                     for($i=1;$i<=odbc_num_fields($res_subj);$i++){
                         if($i == 4){
-                            echo "<div style='width: 33.33%'>" .substr(odbc_result($res_subj, $i),0,-9 )."</div>";
+                            echo '<a href=\'./individual-subject.php?id='.odbc_result($res_subj, 1).'\' style=\'width: 33.33%\'><div >' .substr(odbc_result($res_subj, $i),0,-9 ).'</div></a>';
                         } else {
-                            echo "<div style='width: 33.33%'>" .odbc_result($res_subj, $i) ."</div>";
+                            echo '<a href=\'./individual-subject.php?id='.odbc_result($res_subj, 1).'\' style=\'width: 33.33%\'><div>' .odbc_result($res_subj, $i) .'</div></a>';
                         }
-                    }
+                    }                   
+
                     echo '<button type="button" id="remove-button" onClick="removeSubject(\''. $researcher_id.'\', \''. odbc_result($res_subj, 1).'\')">Remove</button>';
-                    echo "</div>";
+                    
+                    echo "</div></a>";
                 }
                 // Form to assign new patient to researcher
 

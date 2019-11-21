@@ -3,8 +3,8 @@
   include "../../../../sources/TChart.php";    
 
   /* Get Values from form
-  if(isset($_POST["panelGradient"]))
-    $panelGradient = $_POST['panelGradient'];
+  if(isset($_REQUEST["panelGradient"]))
+    $panelGradient = $_REQUEST['panelGradient'];
   */
   
   // Assign Header text

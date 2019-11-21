@@ -2,8 +2,8 @@
         //Includes
         include "../../../sources/TChart.php";
 
-        if(isset($_POST["imgStyle"]))
-          $imgStyle = $_POST["imgStyle"];
+        if(isset($_REQUEST["imgStyle"]))
+          $imgStyle = $_REQUEST["imgStyle"];
 
         $chart1 = new TChart(600,450);
         $chart1->getChart()->getHeader()->setText("Back Image Load");
@@ -17,7 +17,7 @@
         ColorPalettes::_applyPalette($chart1->chart, Theme::getPastelsPalette());
         
         // Changes the back image
-        if(isset($_POST["imgStyle"])) {
+        if(isset($_REQUEST["imgStyle"])) {
           switch ($imgStyle) {
           case 0:
             $chart1->getPanel()->getBrush()->loadImageFromFile("blackGlass.png");

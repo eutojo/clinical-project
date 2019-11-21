@@ -3,8 +3,8 @@
 //Includes
 include "../../../sources/TChart.php";
 
-if(isset($_POST["theme"]))
-  $theme = $_POST["theme"];
+if(isset($_REQUEST["theme"]))
+  $theme = $_REQUEST["theme"];
 
 if (file_exists(dirname(__FILE__).'/chart1.png'))
 {
@@ -18,7 +18,7 @@ $bar->setColorEach(true);
 ThemesList::applyTheme($chart1->getChart(),0);  // Opera
 
 
-if(isset($_POST["theme"]))
+if(isset($_REQUEST["theme"]))
     switch ($theme) {
           case 0:
             ThemesList::applyTheme($chart1->getChart(),0);  // Opera

@@ -36,7 +36,7 @@ $menu_bar = "".
             if(isset($_SESSION['admin']) && $_SESSION['admin'] == 1) {
                 $menu_bar .=
                 '<div class="menu-bar item">'. 
-                '<a href="./subjects.php"> Data Summary </a>'.
+                '<a href="./summary.php"> Data Summary </a>'.
                 '</div>';
             }
             $menu_bar .=

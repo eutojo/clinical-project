@@ -57,6 +57,10 @@
                 $query = "SELECT VitalSignType, Data FROM Physiological_data WHERE Activity_ID = ". $activity_id ."";
                 $res = odbc_exec($conn, $query);
 
+                $ecg_flag = 0;
+                $ppg_flag = 0;
+                $HR_flag = 0;
+                $BP_flag = 0;
                 $count = 0;
                 while(odbc_fetch_row($res)){
                 if($count == 0){
@@ -95,7 +99,11 @@
                         $chart1->render("chart1.png");
                         $rand=0;
                         print '<img src="chart1.png?rand='.$rand.'">';
+                        $ecg_flag = 1;
                     } else if (odbc_result($res, 1) == 'PPG') {
+                        if($ecg_flag == 0) {
+                            echo '<div>No data to display.</div>';
+                        }
                         echo '<h1>PPG</h1>';
                         $data = explode(' ', odbc_result($res, 2));
                         $ignorenulls = 1;
@@ -123,7 +131,18 @@
                         $chart1->render("chart2.png");
                         $rand=0;
                         print '<img src="chart2.png?rand='.$rand.'">';
+                        $ppg_flag = 1;
                     } else if (odbc_result($res, 1) == 'Heart Rate') {
+                        if($ecg_flag == 0) {
+                            echo '<h1>ECG</h1>';
+                            echo '<div>No data to display.</div>';
+                            $ecg_flag = 1;
+                        }
+                        if($ppg_flag == 0){
+                            echo '<h1>PPG</h1>';
+                            echo '<div>No data to display.</div>';
+                            $ppg_flag = 1;
+                        }
                         echo '<div style="display: flex;flex-direction: column; width:100%">';
                         echo '<div style="display:flex; flex-direction: row">';
                         echo '<div>';
@@ -133,8 +152,31 @@
                         echo odbc_result($res, 2);
                         echo '</div>';
                         echo '</div>';
+                        $HR_flag = 1;
 
                     } else {
+                        if($ecg_flag == 0) {
+                            echo '<h1>ECG</h1>';
+                            echo '<div>No data to display.</div>';
+                            $ecg_flag = 1;
+                        }
+                        if($ppg_flag == 0){
+                            echo '<h1>PPG</h1>';
+                            echo '<div>No data to display.</div>';
+                            $ppg_flag = 1;
+                        }
+                        if($HR_flag == 0){
+                            echo '<div style="display: flex;flex-direction: column; width:100%">';
+                            echo '<div style="display:flex; flex-direction: row">';
+                            echo '<div>';
+                            echo 'Heart Rate';
+                            echo '</div>';
+                            echo '<div>';
+                            echo 'No data available.';
+                            echo '</div>';
+                            echo '</div>';
+                            $HR_flag = 1;
+                        }
                         $data = explode(' ', odbc_result($res, 2));
                         echo '<div style="display:flex; flex-direction: row">';
                         echo '<div>';
@@ -161,12 +203,60 @@
                         echo '</div>';
                         echo '</div>';
                         echo '</div>';
+                        $BP_flag = 1;
                     }
 
                     $count++;
                 }
+
                 // No data to display
-                if($count == 0){
+                if($BP_flag == 0){
+                    if($ecg_flag == 0) {
+                        echo '<h1>ECG</h1>';
+                        echo '<div>No data to display.</div>';
+
+                    }
+                    if($ppg_flag == 0){
+                        echo '<h1>PPG</h1>';
+                        echo '<div>No data to display.</div>';
+                    }
+                    if($HR_flag == 0){
+                        echo '<div style="display: flex;flex-direction: column; width:100%">';
+                        echo '<div style="display:flex; flex-direction: row">';
+                        echo '<div>';
+                        echo 'Heart Rate';
+                        echo '</div>';
+                        echo '<div>';
+                        echo 'No data available.';
+                        echo '</div>';
+                        echo '</div>';
+                    }
+                    echo '<div style="display:flex; flex-direction: row">';
+                        echo '<div>';
+                        echo 'Systolic';
+                        echo '</div>';
+                        echo '<div>';
+                        echo 'No data available.';
+                        echo '</div>';
+                        echo '</div>';
+                        echo '<div style="display:flex; flex-direction: row">';
+                        echo '<div>';
+                        echo 'Diastolic';
+                        echo '</div>';
+                        echo '<div>';
+                        echo 'No data available.';
+                        echo '</div>';
+                        echo '</div>';
+                        echo '<div style="display:flex; flex-direction: row">';
+                        echo '<div>';
+                        echo 'Mean Pressure';
+                        echo '</div>';
+                        echo '<div>';
+                        echo 'No data available.';
+                        echo '</div>';
+                        echo '</div>';
+                        echo '</div>';
+                        echo $ppg_flag;
 
                 }
 

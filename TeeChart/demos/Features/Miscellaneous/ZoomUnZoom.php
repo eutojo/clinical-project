@@ -34,13 +34,13 @@
         $_SESSION['yval'] = 1;
     
 
-    if (isset($_POST['Submit'])) 
+    if (isset($_REQUEST['Submit'])) 
     {
         $xxval = $_SESSION['xval']*100;
         $xyval = $_SESSION['yval']*100;   
     }
 
-    if (isset($_POST['Submit2'])) 
+    if (isset($_REQUEST['Submit2'])) 
     {
         $xxval = $_SESSION['xval'];
         $xyval = $_SESSION['yval'];   
@@ -66,20 +66,20 @@
     $line2->checkDataSource();
 
     // Default
-    if (isset($_POST['Submit3'])) 
+    if (isset($_REQUEST['Submit3'])) 
     { 
         $tChart1->doInvalidate();  
     }
 
     // Zoom
-    if (isset($_POST['Submit2'])) 
+    if (isset($_REQUEST['Submit2'])) 
     { 
         $tChart1->doInvalidate();
         $tChart1->getZoom()->zoomRect(new Rectangle(200,200,200,200));
     }
 
     // UnZoom
-    if (isset($_POST['Submit'])) 
+    if (isset($_REQUEST['Submit'])) 
     { 
       $tChart1->doInvalidate();
       $tChart1->getZoom()->zoomRect(new Rectangle(-$xxval,-$xyval,$tChart1->getChart()->getWidth()+$xxval+$xxval,$tChart1->getChart()->getHeight()+$xyval+$xyval));  
