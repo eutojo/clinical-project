@@ -7,10 +7,13 @@ a {
     text-decoration: inherit;
 }
 
+h2 {
+    color: #1D345A;
+}
+
 .table-row {
     display: flex;
     flex-direction: row;
-    width: 100vw;
     justify-content: space-around;
 }
 
@@ -32,4 +35,23 @@ form.assignments{
 
 span {
     height: 1em;
+}
+
+.page-container {
+    margin: 0px 2em;
+}
+.checkbox-container {
+    padding-top: 1em;
+}
+
+.incorrect {
+    color: #D72226;
+}
+
+.correct {
+    color: #2BA037;
+}
+
+.table-odd {
+    background-color:#95BADD;
 }

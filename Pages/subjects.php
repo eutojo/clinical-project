@@ -29,7 +29,7 @@
             $conn = odbc_connect('z5116858', '', '',SQL_CUR_USE_ODBC);
             $query = "SELECT * FROM Subject";
             $res = odbc_exec($conn, $query);
-    
+            echo '<div class="page-container" style="margin-top:1em">';
             echo '<input type="checkbox" id="researcher_subjects_only" name="researcher_subjects_only" value="yes" onChange="subjectsFilter()"> View own subjects only.';
             echo '<div class="table-row">';
             for($i=1;$i<=odbc_num_fields($res);$i++){
@@ -64,6 +64,7 @@
                 echo '<button type="button" id="remove-button" onClick="removeSubject(\'NULL\',\''. odbc_result($res, 1).'\')">Remove</button>';
                 echo "</div></a>";
             }
+
         // Only show researcher's subjects
         } else {
             $conn = odbc_connect('z5116858', '', '',SQL_CUR_USE_ODBC);
@@ -134,7 +135,7 @@
                     '<input type="submit" value="Submit">'.
                 '</div>' .
             '</form>'.
-        '</div>';
+        '</div></div>';
 
         echo $new_subject_form;
 

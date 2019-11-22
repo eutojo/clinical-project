@@ -58,6 +58,7 @@
                 // Subject is assigned
                 if(odbc_result($res, 1) > 0 || $_SESSION['admin'] == 1) {
                     $subject_page = ''.
+                    '<div class="page-container">'.
                     '<h1>['. $subject_id.'] '.$surname.', '.$name.'</h1>'.
                     '<form id="form__change_subject" name="form__change_subject" method="POST" onSubmit="return validInfo(\'inv_subject\')" action="../PHP/modify-entry-logic.php">'. 
                         '<div style="width: 33.33%" >' .
@@ -109,7 +110,7 @@
                             // Submit button
                             '<input name="submit_button" type="submit" value="Edit details">'.
                         '</div>' .
-                    '</form>' ;
+                    '</form>';
 
         
                     echo $subject_page;
@@ -126,8 +127,14 @@
                     echo '</div>';
 
                     while(odbc_fetch_row($res)){
-                        $activity_flag = 1;
-                        echo '<a href="./activity.php?id='.$subject_id.'&activity='.odbc_result($res, 1).'"><div class="table-row">';
+                        $activity_flag = $activity_flag + 1;
+                        echo '<a href="./activity.php?id='.$subject_id.'&activity='.odbc_result($res, 1).'">'; 
+                        if($activity_flag%2==1){
+                            echo '<div class="table-row table-odd">';
+                        } else {
+                            echo '<div class="table-row">';
+                        }
+                        
                         for($i=2;$i<=odbc_num_fields($res);$i++){
                             if($i == 3){
                                 echo "<div style='width: 33.33%'>" .substr(odbc_result($res, $i),0,-9 )."</div>";
@@ -144,6 +151,8 @@
                     if($activity_flag == 0){
                         echo '<div>No data to display</a>';
                     }
+
+                    echo '</div>';
 
                 } else {
                     echo '<script type="text/javascript">'.

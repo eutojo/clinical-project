@@ -49,6 +49,7 @@
                 $admin = odbc_result($res, 3);
 
                 $subject_page = ''.
+                    '<div class="page-container">'.
                     '<h1>['. $id.'] '.$surname.', '.$firstname.'</h1>'.
                     '<form id="form__change_researcher" name="form__change_researcher" method="POST" onSubmit="return validInfo(\'inv_researcher\')" action="../PHP/modify-entry-logic.php">'. 
                         '<div style="width: 33.33%" >' .
@@ -93,8 +94,9 @@
                         '<div>' .
                             // Submit button
                             '<input name="submit_button" type="submit" value="Edit details">'.
-                        '</div>' .
-                    '</form>' ;
+                        '</div>'.
+                    '</form>';
+                    
 
         
                     echo $subject_page;
@@ -103,6 +105,7 @@
 
                 require_once('../Components/new-assignment.php');
             
+                echo '</div>';
             // Subject doesn't exist
             } else {
                 // Direct to researcher page if admin

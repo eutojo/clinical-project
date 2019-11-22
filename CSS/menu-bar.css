@@ -2,7 +2,7 @@
     margin: 0px;
     width: 100vw;
     height: 50px;
-    background-color: red;
+    background-color: #1D345A;
 
     display: flex;
     flex-direction: row;
@@ -16,4 +16,5 @@
     justify-content: center;
 
     cursor: pointer;
+    color: white;
 }

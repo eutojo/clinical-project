@@ -30,7 +30,8 @@
 
             while(odbc_fetch_row($res)){
                 // Name of researcher
-                echo "<h2>[" .odbc_result($res, 1) . "] " .odbc_result($res, 2) . " " .odbc_result($res, 3) ."</h2>";
+                echo '<div class="page-container">';
+                echo '<h2>[' .odbc_result($res, 1) . '] ' .odbc_result($res, 2) . ' ' .odbc_result($res, 3) .'</h2>';
                 $researcher_id = odbc_result($res, 1);
             
                 // Their subjects
@@ -43,8 +44,15 @@
                 }
                 echo '<div style="width:65.64px"></div>';
                 echo "</div>";
+                $flag = 0;
                 while(odbc_fetch_row($res_subj)){
-                    echo '<div class=\'table-row\'>';
+                    $flag = $flag + 1;
+                    if($flag%2 == 1){
+                        echo '<div class="table-row table-odd">';
+                    } else {
+                        echo '<div class="table-row">';
+                    }
+
                     for($i=1;$i<=odbc_num_fields($res_subj);$i++){
                         if($i == 4){
                             echo '<a href=\'./individual-subject.php?id='.odbc_result($res_subj, 1).'\' style=\'width: 33.33%\'><div >' .substr(odbc_result($res_subj, $i),0,-9 ).'</div></a>';
@@ -57,6 +65,10 @@
                     
                     echo "</div></a>";
                 }
+
+                if($flag ==0){
+                    echo '<div style="text-align:center"> No subjects assigned. </div>';
+                }
                 // Form to assign new patient to researcher
 
                 $query = "SELECT Subject.[Subject_ID], FirstName, LastName FROM Subject LEFT JOIN Assignments ON (Subject.[Subject_ID] = Assignments.[Subject_ID]) WHERE Assignments.[Researcher_ID] <> '".$researcher_id. "' OR Assignments.[Researcher_ID] IS NULL";
@@ -64,7 +76,7 @@
 
                 $query = "SELECT Subject_ID FROM Assignments WHERE Researcher_ID ='".$researcher_id."'";
                 $res_dup = odbc_exec($conn, $query);
-                echo '<form class="assignments" method="POST" action="../PHP/new-entry-logic.php">';
+                echo '<form style="margin-top:1em" class="assignments" method="POST" action="../PHP/new-entry-logic.php">';
                 echo '<input type="hidden" name="researcher_id" value="'.$researcher_id .'" />';
                 echo '<select name="subject_id">';
                 echo '<option value="default">Assign new subject</option>';
@@ -86,6 +98,7 @@
                 echo '</select>';
                 echo '<input type="submit" value="Assign">';
                 echo '</form>';
+                echo '</div>';
             }
         } else {
             echo '<script type="text/javascript">'.

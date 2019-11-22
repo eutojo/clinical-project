@@ -51,6 +51,7 @@
                 'subjectPromt(0);'.
                 '</script>';
             } else {
+                echo '<div class="page-container">';
                 echo '<h1>['. $subject_id.'] '.$surname.', '.$name.' - Activity Details</h1>';
 
                 $activity_id = $_GET['activity'];
@@ -143,8 +144,8 @@
                             echo '<div>No data to display.</div>';
                             $ppg_flag = 1;
                         }
-                        echo '<div style="display: flex;flex-direction: column; width:100%">';
-                        echo '<div style="display:flex; flex-direction: row">';
+                        echo '<div class="table-col">';
+                            echo '<div class="table-row" style="justify-content: space-evenly">';
                         echo '<div>';
                         echo 'Heart Rate';
                         echo '</div>';
@@ -166,8 +167,8 @@
                             $ppg_flag = 1;
                         }
                         if($HR_flag == 0){
-                            echo '<div style="display: flex;flex-direction: column; width:100%">';
-                            echo '<div style="display:flex; flex-direction: row">';
+                            echo '<div class="table-col">';
+                            echo '<div class="table-row" style="justify-content: space-evenly">';
                             echo '<div>';
                             echo 'Heart Rate';
                             echo '</div>';
@@ -178,7 +179,7 @@
                             $HR_flag = 1;
                         }
                         $data = explode(' ', odbc_result($res, 2));
-                        echo '<div style="display:flex; flex-direction: row">';
+                        echo '<div class="table-row" style="justify-content: space-evenly">';
                         echo '<div>';
                         echo 'Systolic';
                         echo '</div>';
@@ -186,7 +187,7 @@
                         echo $data[0];
                         echo '</div>';
                         echo '</div>';
-                        echo '<div style="display:flex; flex-direction: row">';
+                        echo '<div class="table-row" style="justify-content: space-evenly">';
                         echo '<div>';
                         echo 'Diastolic';
                         echo '</div>';
@@ -194,7 +195,7 @@
                         echo $data[1];
                         echo '</div>';
                         echo '</div>';
-                        echo '<div style="display:flex; flex-direction: row">';
+                        echo '<div class="table-row" style="justify-content: space-evenly">';
                         echo '<div>';
                         echo 'Mean Pressure';
                         echo '</div>';
@@ -259,6 +260,8 @@
                         echo $ppg_flag;
 
                 }
+
+                echo '</div>';
 
             }
         }
