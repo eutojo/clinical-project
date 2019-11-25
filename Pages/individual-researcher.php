@@ -52,34 +52,34 @@
                     '<div class="page-container">'.
                     '<h1>['. $id.'] '.$surname.', '.$firstname.'</h1>'.
                     '<form id="form__change_researcher" name="form__change_researcher" method="POST" onSubmit="return validInfo(\'inv_researcher\')" action="../PHP/modify-entry-logic.php">'. 
-                        '<div style="width: 33.33%" >' .
+                        '<div>' .
                         // ID
                             '<label>ID</label>'.
                             '<input readonly type="text" id="researcher_id" name="researcher_id" value="'.$id.'">'.
                             '</div>' .
-                        '<div style="width: 33.33%" >' .
+                        '<div>' .
                             // First Name
                             '<label>First Name</label>'.
                             '<input readonly type="text" id="researcher_name" name="researcher_name" value="'.$firstname.'" onChange="validateName(\'first\',\'inv_researcher\')">'.
                             '<span id="validation__inv_researcher_name"></span>'.
                         '</div>' .
-                        '<div style="width: 33.33%" >' .
+                        '<div>' .
                             // Last Name
                             '<label>Last Name</label>'.
                             '<input readonly type="text" id="researcher_surname" name="researcher_surname" value="'.$surname.'" onChange="validateName(\'last\',\'inv_researcher\')">'.
                             '<span id="validation__inv_researcher_surname"></span>'.
                         '</div>' .               
-                        '<div style="width: 33.33%" >' .
+                        '<div>' .
                             '<label>New Password</label>'.
                             '<input readonly type="text" id="researcher_password1" name="researcher_password1" onChange="validatePassword1(\'inv_researcher\')">'.
                             '<span id="validation__inv_researcher_password1"></span>'.
                         '</div>' .
-                        '<div style="width: 33.33%" >' .
+                        '<div>' .
                             '<label>New Retype Password</label>'.
                             '<input readonly type="text" id="researcher_password2" name="researcher_password2" onChange="validatePassword2(\'inv_researcher\')">'.
                             '<span id="validation__inv_researcher_password2"></span>'.
                         '</div>' .
-                        '<div style="width: 33.33%" >' .
+                        '<div>' .
                             '<label>Admin</label>';
                             if($admin == 1){
                                 $subject_page .=

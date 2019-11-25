@@ -1,5 +1,6 @@
 body {
     margin: 0px;
+    font-size: 18px;
 }
 
 a {
@@ -31,6 +32,7 @@ h2 {
 form.assignments{
     display: flex;
     flex-direction: row;
+    margin-top: 1.5em;
 }
 
 span {
@@ -53,5 +55,48 @@ span {
 }
 
 .table-odd {
-    background-color:#95BADD;
+    background-color: #1D345A;
+    color: white;
+}
+
+.graph {
+    display: flex;
+    justify-content: center;
+}
+
+.activity h1, .summary h1{
+    text-align: center;
+}
+
+.activity .table-row {
+    text-align: center;
+    justify-content: center;
+    height: 1.5em;
+    width: 50%;
+}
+
+.activity .table-row div{
+    width: 25%;
+}
+
+.activity .table-col {
+    width: 100%;
+    align-items: center;
+}
+
+.assignments h1 {
+    text-align: center;
+}
+
+.assignments form{
+    justify-content: center;
+    margin-top: 1.5em;
+}
+
+.summary h2{
+    text-align: center;
+}
+
+.page-container.login-page h1 {
+    text-align:center;
 }

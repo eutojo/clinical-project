@@ -29,5 +29,5 @@
     }
 
     // echo '</select>';
-    echo '<input type="submit" value="Assign">';
+    echo '<input type="submit" value="Assign"';
     echo '</form>';

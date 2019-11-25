@@ -30,8 +30,8 @@
 
             while(odbc_fetch_row($res)){
                 // Name of researcher
-                echo '<div class="page-container">';
-                echo '<h2>[' .odbc_result($res, 1) . '] ' .odbc_result($res, 2) . ' ' .odbc_result($res, 3) .'</h2>';
+                echo '<div class="page-container assignments">';
+                echo '<a href="./individual-researcher.php?id='.odbc_result($res, 1).'"><h1>[' .odbc_result($res, 1) . '] ' .odbc_result($res, 2) . ' ' .odbc_result($res, 3) .'</h1></a>';
                 $researcher_id = odbc_result($res, 1);
             
                 // Their subjects
@@ -67,7 +67,7 @@
                 }
 
                 if($flag ==0){
-                    echo '<div style="text-align:center"> No subjects assigned. </div>';
+                    echo '<div style="text-align:center; color: #D72226"> No subjects assigned. </div>';
                 }
                 // Form to assign new patient to researcher
 

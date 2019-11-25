@@ -2,7 +2,6 @@
 
     $conn = odbc_connect('z5116858', '', '',SQL_CUR_USE_ODBC);
 
-    print_r($_REQUEST);
     if(isset($_REQUEST['researcher_id'])){
         $id = $_REQUEST['researcher_id'];
         $name = $_REQUEST['researcher_name'];
@@ -24,21 +23,21 @@
         $query .= 
             ' WHERE Researcher_ID=\''.$id.'\'';
         
-            echo $query;
         $res = odbc_exec($conn, $query);
 
         $location = 'Location:../Pages/individual-researcher.php?id='.$id;
         header($location);
     } else {
+        print_r($_REQUEST);
         $id  = $_REQUEST['subject_id'];
         $name = $_REQUEST['subject_name'];
         $surname = $_REQUEST['subject_surname'];
         $dob = $_REQUEST['subject_dob'];
-        // $gender = $_REQUEST['subject_gender'];
+        $gender = $_REQUEST['subject_gender'];
         $contact = $_REQUEST['subject_contact'];
 
         $query = 'UPDATE Subject SET FirstName=\''.$name.'\', LastName=\''.$surname.'\', DOB=\''.$dob.
-        '\', Contact=\''.$contact.'\' WHERE Subject_ID=\''.$id.'\'';
+        '\', Contact=\''.$contact.'\', Gender=\''.$gender.'\' WHERE Subject_ID=\''.$id.'\'';
         echo $query;
         $res = odbc_exec($conn, $query);
         $location = 'Location:../Pages/individual-subject.php?id='.$id;

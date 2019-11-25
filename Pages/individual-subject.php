@@ -59,35 +59,35 @@
                 if(odbc_result($res, 1) > 0 || $_SESSION['admin'] == 1) {
                     $subject_page = ''.
                     '<div class="page-container">'.
-                    '<h1>['. $subject_id.'] '.$surname.', '.$name.'</h1>'.
+                    '<a href="./individual-subject.php?id='.$subject_id.'"><h1>['. $subject_id.'] '.$surname.', '.$name.'</h1></a>'.
                     '<form id="form__change_subject" name="form__change_subject" method="POST" onSubmit="return validInfo(\'inv_subject\')" action="../PHP/modify-entry-logic.php">'. 
-                        '<div style="width: 33.33%" >' .
+                        '<div>' .
                         // ID
                             '<label>ID</label>'.
                             '<input readonly type="text" id="subject_id" name="subject_id" value="'.$subject_id.'">'.
                             '</div>' .
-                        '<div style="width: 33.33%" >' .
+                        '<div>' .
                             // First Name
                             '<label>First Name</label>'.
                             '<input readonly type="text" id="subject_name" name="subject_name" value="'.$name.'" onChange="validateName(\'first\',\'inv_subject\')">'.
                             '<span id="validation__inv_subject_name"></span>'.
                         '</div>' .
-                        '<div style="width: 33.33%" >' .
+                        '<div>' .
                             // Last Name
                             '<label>Last Name</label>'.
                             '<input readonly type="text" id="subject_surname" name="subject_surname" value="'.$surname.'" onChange="validateName(\'last\',\'inv_subject\')">'.
                             '<span id="validation__inv_subject_surname"></span>'.
                         '</div>' .
-                        '<div style="width: 33.33%" >' .
+                        '<div>' .
                             // DOB
                             '<label>Date of Birth</label>'.
                             '<input readonly type="text" id="subject_dob" name="subject_dob" value="'.$dob.'" onChange="validateBirthday(\'inv_subject\')">'.
                             '<span id="validation__inv_subject_dob"></span>'.
                         '</div>' .
-                        '<div style="width: 33.33%" >' .
+                        '<div>' .
                             // Gender
                             '<label>Gender</label>'.
-                            '<select id="inv_subject_gender" name="inv_subject_gender">';
+                            '<select id="subject_gender" name="subject_gender">';
                             if($gender == 'Female'){
                                 $subject_page .=
                                 '<option value="Female" selected>Female</option>'.
@@ -100,10 +100,10 @@
                             $subject_page .= 
                             '</select>' .
                         '</div>' .
-                        '<div style="width: 33.33%" >' .
+                        '<div>' .
                             // Contact
                             '<label>Contact</label>'.
-                            '<input readonly type="text" id="subject_contact" name="subject_contact" value="'.$contact.'" onChange="validateContact(\'inv_subject\')">'.
+                            '<input readonly type="text" id="subject_contact" name="subject_contact" value="'.$contact.'" onChange="validateContact(\'inv_subject\')" maxlength="10">'.
                             '<span id="validation__inv_subject_contact"></span>'.
                         '</div>' .
                         '<div>' .
@@ -137,7 +137,9 @@
                         
                         for($i=2;$i<=odbc_num_fields($res);$i++){
                             if($i == 3){
-                                echo "<div style='width: 33.33%'>" .substr(odbc_result($res, $i),0,-9 )."</div>";
+                                $date = new DateTime(odbc_result($res, $i));
+                                $date = str_replace('-','/',$date->format('d-m-Y'));
+                                echo "<div style='width: 33.33%'>" .$date."</div>";
                             } else {
                                 echo "<div style='width: 33.33%'>" .odbc_result($res, $i) ."</div>";
                             }
@@ -149,7 +151,7 @@
                     }
 
                     if($activity_flag == 0){
-                        echo '<div>No data to display</a>';
+                        echo '<div style="text-align: center" class="incorrect">No data to display</a>';
                     }
 
                     echo '</div>';

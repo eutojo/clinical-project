@@ -14,12 +14,12 @@ function adminPrompt(){
 }
 
 function subjectPromt(){
-    alert('Subject does\'t exist or you do not have permission to view their details.');
+    alert('Subject doesn\'t exist or you do not have permission to view their details.');
     window.location = './subjects.php';
 }
 
 function researcherPrompt(admin){
-    alert('Subject does\'t exist or you do not have permission to view their details.');
+    alert('Researcher doesn\'t exist or you do not have permission to view their details.');
 
     if(admin == 1){
         window.location = './researchers.php';
@@ -58,9 +58,10 @@ function validInfo(page){
             return true;
         }
     } else if(page=="subject"){
-        if(validateID('subject') && validateName('first','subject') && validateName('last','subject') &&
-        validateBirthday('subject') && validateContact('subject')){
+        if(validateID('subject') && validateName('first','subject') && validateName('last','subject') && validateBirthday('subject') && validateContact('subject')){
+            console.log('yes');
             return true;
+            
         }
     } else if(page=="inv_researcher"){
         var researcher_name = document.getElementById('researcher_name');
@@ -222,10 +223,12 @@ function validatePassword2(page){
 function validateID(page){
     
 
+    var researcher_flag = 0;
     if(page == "researcher") {
-        var IDRE = /^[A-Z]{6}$/;
+        var IDRE = /^[A-Z]{4,6}$/;
         var inputID = document.getElementById('new__researcher_id');
         var error = document.getElementById('validation__researcher_id');
+        researcher_flag = 1;
     } else {
         var IDRE = /^[A-Z]{2}[0-9]{2}$/;
         var inputID = document.getElementById('new__subject_id');
@@ -233,17 +236,32 @@ function validateID(page){
     }
 
     if(IDRE.test(inputID.value)){
-        error.innerHTML = "No errors.";
-        error.classList.add("correct");
-        error.classList.remove("incorrect");
-        return true;
+        $.ajax({
+            type: "POST",
+            url: '../PHP/check-id.php',
+            data:{input_ID:inputID.value, researcher_flag: researcher_flag},
+            success:function(html) {
+                if(html == 1){
+                    error.innerHTML = "ID must be unique.";
+                    error.classList.add("incorrect");
+                    error.classList.remove("correct");
+                    return false;
+                } else {
+                    error.innerHTML = "No errors.";
+                    error.classList.add("correct");
+                    error.classList.remove("incorrect");
+                    return true;
+                }                
+            }
+    
+       });
+    } else {
+        error.innerHTML = "Please enter a valid ID";
+        error.classList.add("incorrect");
+        error.classList.remove("correct");
+    
+        return false;
     }
-
-    error.innerHTML = "Please enter a valid ID";
-    error.classList.add("incorrect");
-    error.classList.remove("correct");
-
-    return true;
 }
 
 function validateContact(page){
@@ -429,7 +447,6 @@ function updateSubject(page){
             subject_name.readOnly = false;
             subject_surname.readOnly = false;
             subject_dob.readOnly = false;
-            inv_subject_gender.disabled = false;
             subject_contact.readOnly = false;
             document.form__change_subject.submit_button.value = "Submit";
             return false;
@@ -437,7 +454,6 @@ function updateSubject(page){
             subject_name.readOnly = true;
             subject_surname.readOnly = true;
             subject_dob.readOnly = true;
-            inv_subject_gender.disabled = true;
             subject_contact.readOnly = true;
             document.form__change_subject.submit_button.value = "Edit details";
     
