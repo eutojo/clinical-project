@@ -53,13 +53,24 @@ function subjectsFilter(){
 function validInfo(page){
     // Check if all input is valid
     if(page == "researcher"){
-        if(validateName('first','researcher') && validateName('last','researcher') &&
-        validateID('researcher') && validatePassword1() && validatePassword2()){
+        var error = document.getElementById('validation__researcher_id');
+        if(error.classList.contains('error')){
+            var ID = false;
+        } else {
+            var ID = true;
+        }
+        if(ID && validateName('first','researcher') && validateName('last','researcher') && validatePassword1() && validatePassword2()){
             return true;
         }
     } else if(page=="subject"){
-        if(validateID('subject') && validateName('first','subject') && validateName('last','subject') && validateBirthday('subject') && validateContact('subject')){
-            console.log('yes');
+        var error = document.getElementById('validation__subject_id');
+        if(error.classList.contains('error')){
+            var ID = false;
+        } else {
+            var ID = true;
+        }
+       
+        if(validateName('first','subject') && validateName('last','subject') && validateBirthday('subject') && validateContact('subject')){
             return true;
             
         }
@@ -222,7 +233,6 @@ function validatePassword2(page){
 // ID validation TODO:
 function validateID(page){
     
-
     var researcher_flag = 0;
     if(page == "researcher") {
         var IDRE = /^[A-Z]{4,6}$/;
@@ -233,6 +243,7 @@ function validateID(page){
         var IDRE = /^[A-Z]{2}[0-9]{2}$/;
         var inputID = document.getElementById('new__subject_id');
         var error = document.getElementById('validation__subject_id');
+        researcher_flag = 0;
     }
 
     if(IDRE.test(inputID.value)){
@@ -270,6 +281,9 @@ function validateContact(page){
     if(page=='subject'){
         var inputContact = document.getElementById('new__subject_contact');
         var error = document.getElementById('validation__subject_contact');
+        if(inputContact.value == ""){
+            return true;
+        }
     } else {
         var inputContact = document.getElementById('subject_contact');
         var error = document.getElementById('validation__inv_subject_contact');
@@ -296,7 +310,6 @@ function validateName(type, page){
     var nameRE = /^[a-zA-Z'-\s]+$/;
     
     if(type == "first"){
-        console.log(page);
         if(page == "researcher"){
             
             var inputName = document.getElementById('new__researcher_name');
