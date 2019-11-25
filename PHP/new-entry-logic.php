@@ -24,8 +24,8 @@
         $query = "INSERT INTO Assignments (Researcher_ID, Subject_ID) VALUES ('". $researcher_id ."', '". $subject_id. "')";
         $res = odbc_exec($conn, $query);
 
-        if($_SESSION['page'] == 'individual-researcher'){
-            $path = 'Location: ../Pages/individual-researcher.php?id=' . $_GET['id'] ;
+        if(isset($_REQUEST['page']) && $_REQUEST['page'] == 'individual'){
+            $path = 'Location: ../Pages/individual-researcher.php?id=' . $researcher_id ;
         } else {
             $path = 'Location: ../Pages/assignments.php';
         }

@@ -1,6 +1,5 @@
 <?php
     session_start(); 
-    $_SESSION['page'] = 'individual-researcher';
 ?>
 
 <head>
@@ -41,7 +40,10 @@
                 $count++;
             }
 
+            
+
             // Subject exists
+            $_SESSION['page'] = 'individual-researcher';
             if($count > 0) {
                 // Obtain subject's details
                 $firstname = odbc_result($res, 1);
